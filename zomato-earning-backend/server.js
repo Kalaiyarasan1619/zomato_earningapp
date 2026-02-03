@@ -13,18 +13,14 @@ app.use(express.json());
 
 app.use('/api/earnings', earningsRouter);
 
-// ❌ app.listen REMOVE
-
-// DB connect only
+// ✅ DB connect ONLY (NO sync)
 (async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync();
     console.log('🟢 DB connected');
   } catch (err) {
     console.error('🔴 DB error:', err);
   }
 })();
 
-// ✅ VERY IMPORTANT
 export default app;

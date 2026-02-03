@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import "../models/index.js";
+import sequelize from "../models/index.js";
+
 import earningsRouter from "../routes/earnings.js";
 
 const app = express();

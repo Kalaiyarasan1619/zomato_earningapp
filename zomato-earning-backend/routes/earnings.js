@@ -51,28 +51,21 @@ router.post('/', async (req, res) => {
 });
 
 
-router.get('/other-types', async (req, res) => {
+router.get("/other-types", async (req, res) => {
   try {
     const rows = await DailyEarning.findAll({
       attributes: [
-        [DailyEarning.sequelize.fn(
-          'DISTINCT',
-          DailyEarning.sequelize.col('otherType')
-        ), 'otherType']
+        [DailyEarning.sequelize.fn("DISTINCT",
+          DailyEarning.sequelize.col("otherType")
+        ), "otherType"]
       ],
-      where: {
-        otherType: { [Op.ne]: null }
-      }
+      where: { otherType: { [Op.ne]: null } }
     });
 
-    const otherTypes = rows
-      .map(r => r.otherType)
-      .filter(v => v && v.trim() !== '');
-
-    res.status(200).json(otherTypes);
-
+    res.json(rows.map(r => r.otherType).filter(Boolean));
   } catch (err) {
-    console.error('FETCH otherType ERROR:', err);
-    res.status(500).json({ error: 'Failed to fetch other types' });
+    console.error(err);
+    res.status(500).json({ error: "DB error" });
   }
 });
+

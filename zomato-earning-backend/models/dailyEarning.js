@@ -1,8 +1,8 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from './index.js';
+import { DataTypes } from "sequelize";
+import sequelize from "./index.js";   // 🔥 THIS LINE FIX
 
 export const DailyEarning = sequelize.define(
-  'DailyEarning',
+  "DailyEarning",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,17 +11,17 @@ export const DailyEarning = sequelize.define(
     },
 
     entryDate: {
-      type: DataTypes.DATEONLY,   // 2026-02-01
+      type: DataTypes.DATEONLY,
       allowNull: false
     },
 
     entryMonth: {
-      type: DataTypes.STRING(15), // ✅ January, February, March...
+      type: DataTypes.STRING(15),
       allowNull: false
     },
 
     entryYear: {
-      type: DataTypes.SMALLINT,   // 2026
+      type: DataTypes.SMALLINT,
       allowNull: false
     },
 
@@ -49,15 +49,16 @@ export const DailyEarning = sequelize.define(
       type: DataTypes.DECIMAL(10, 2),
       defaultValue: 0
     },
-     totalEarnings: {
+
+    totalEarnings: {
       type: DataTypes.DECIMAL(10, 2),
       defaultValue: 0
-    },
+    }
   },
   {
-    tableName: 'daily_earnings',
+    tableName: "daily_earnings",
     timestamps: true,
-    createdAt: 'created_at',
+    createdAt: "created_at",
     updatedAt: false
   }
 );

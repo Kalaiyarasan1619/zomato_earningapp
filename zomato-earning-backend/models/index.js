@@ -21,4 +21,5 @@ if (!global.sequelize) {
 }
 
 sequelize = global.sequelize;
-export { sequelize };
+
+export default sequelize;   // 🔥 IMPORTANT

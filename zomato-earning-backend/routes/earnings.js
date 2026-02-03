@@ -9,9 +9,6 @@ const MONTH_NAMES = [
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-/* =========================
-   POST – Insert Daily Data
-   ========================= */
 router.post('/', async (req, res) => {
   try {
     const {
@@ -53,9 +50,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-/* =========================
-   GET – otherType ONLY
-   ========================= */
+
 router.get('/other-types', async (req, res) => {
   try {
     const rows = await DailyEarning.findAll({

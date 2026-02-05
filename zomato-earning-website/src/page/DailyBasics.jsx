@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+
 /*──────────────────────────────────────
   REUSABLE SINGLE-AMOUNT INPUT
 ──────────────────────────────────────*/
@@ -90,7 +93,7 @@ const DailyBasics = () => {
   useEffect(() => {
     const fetchOtherTypes = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/earnings/other-types');
+        const res = await fetch(`${BASE_URL}/daily-earnings/other-types`);
         const data = await res.json();
 
         if (Array.isArray(data)) {
@@ -137,7 +140,7 @@ const DailyBasics = () => {
 
     try {
       console.log(payload, "Earnings Payload");
-      const response = await fetch('http://localhost:5000/api/earnings', {
+      const response = await fetch(`${BASE_URL}/daily-earnings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

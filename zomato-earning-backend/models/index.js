@@ -1,6 +1,11 @@
+import env from "../config/env.js";
 import { Sequelize } from "sequelize";
 
-const sequelize = new Sequelize(process.env.DB_URL, {
+if (!env.DB_URL) {
+  throw new Error("❌ DB_URL missing in .env");
+}
+
+const sequelize = new Sequelize(env.DB_URL, {
   dialect: "postgres",
   logging: false,
   dialectOptions: {

@@ -8,15 +8,19 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// DB connect once (serverless safe)
 let dbConnected = false;
+
 app.use(async (req, res, next) => {
-  if (!dbConnected) {
-    await sequelize.authenticate();
-    dbConnected = true;
-    console.log("✅ DB Connected");
+  try {
+    if (!dbConnected) {
+      await sequelize.authenticate();
+      dbConnected = true;
+      console.log("✅ DB Connected");
+    }
+    next();
+  } catch (error) {
+    return res.status(500).json({ error: "Database connection failed" });
   }
-  next();
 });
 
 app.get("/", (req, res) => {
